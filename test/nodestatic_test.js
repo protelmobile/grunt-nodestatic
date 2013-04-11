@@ -14,10 +14,10 @@ function get(url, done) {
   });
 }
 
-exports.connect = {
+exports.nodestatic = {
   custom_base: function(test) {
     test.expect(2);
-    get('http://localhost:8000/fixtures/hello.txt', function(res, body) {
+    get('http://localhost:8080/fixtures/hello.txt', function(res, body) {
       test.equal(res.statusCode, 200, 'should return 200');
       test.equal(body, 'Hello world', 'should return static page');
       test.done();

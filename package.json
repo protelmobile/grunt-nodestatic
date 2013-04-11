@@ -1,23 +1,23 @@
 {
-  "name": "grunt-contrib-connect",
-  "description": "Start a connect web server.",
-  "version": "0.3.0",
-  "homepage": "https://github.com/gruntjs/grunt-contrib-connect",
+  "name": "grunt-nodestatic",
+  "description": "Start a static web server (based on node-static).",
+  "version": "0.1.0",
+  "homepage": "https://github.com/ia3andy/grunt-nodestatic",
   "author": {
-    "name": "Grunt Team",
-    "url": "http://gruntjs.com/"
+    "name": "Andy Damevin",
+    "url": "http://github.com/ia3andy"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gruntjs/grunt-contrib-connect.git"
+    "url": "git@github.com:ia3andy/grunt-nodestatic.git"
   },
   "bugs": {
-    "url": "https://github.com/gruntjs/grunt-contrib-connect/issues"
+    "url": "https://github.com/ia3andy/grunt-nodestatic/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/gruntjs/grunt-contrib-connect/blob/master/LICENSE-MIT"
+      "url": "https://github.com/ia3andy/grunt-nodestatic/blob/master/LICENSE-MIT"
     }
   ],
   "main": "Gruntfile.js",
@@ -28,7 +28,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "connect": "~2.7.3"
+    "node-static": "~0.6.7",
+    "colors": "~0.6.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.2.0",
@@ -40,9 +41,13 @@
     "grunt": "~0.4.0"
   },
   "keywords": [
+    "grunt",
     "gruntplugin",
     "server",
     "connect",
+    "static",
+    "node-static",
+    "file",
     "http"
   ]
 }

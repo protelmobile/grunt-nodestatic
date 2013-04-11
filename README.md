@@ -1,6 +1,6 @@
-# grunt-contrib-connect [![Build Status](https://secure.travis-ci.org/gruntjs/grunt-contrib-connect.png?branch=master)](http://travis-ci.org/gruntjs/grunt-contrib-connect)
+# grunt-nodestatic
 
-> Start a connect web server.
+> Start a node-static web server.
 
 
 
@@ -10,39 +10,31 @@ This plugin requires Grunt `~0.4.0`
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
 ```shell
-npm install grunt-contrib-connect --save-dev
+npm install grunt-nodestatic --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-contrib-connect');
+grunt.loadNpmTasks('grunt-nodestatic');
 ```
 
 
 
 
-## Connect task
-_Run this task with the `grunt connect` command._
+## static task
+_Run this task with the `grunt nodestatic` command._
 
-Note that this server only runs as long as grunt is running. Once grunt's tasks have completed, the web server stops. This behavior can be changed with the [keepalive](#keepalive) option, and can be enabled ad-hoc by running the task like `grunt connect:keepalive`.
+Note that this server only runs as long as grunt is running. Once grunt's tasks have completed, the web server stops. This behavior can be changed with the [keepalive](#keepalive) option, and can be enabled ad-hoc by running the task like `grunt nodestatic:keepalive`.
 
 This task was designed to be used in conjunction with another task that is run immediately afterwards, like the [grunt-contrib-qunit plugin](https://github.com/gruntjs/grunt-contrib-qunit) `qunit` task.
 ### Options
 
 #### port
 Type: `Integer`
-Default: `8000`
+Default: `8080`
 
 The port on which the webserver will respond. The task will fail if the specified port is already in use. You can use the special values `0` or `'?'` to use a system-assigned port.
-
-#### hostname
-Type: `String`
-Default: `'localhost'`
-
-The hostname the webserver will use.
-
-Setting it to `'*'` will make the server accessible from anywhere.
 
 #### base
 Type: `String`
@@ -56,40 +48,35 @@ Default: `false`
 
 Keep the server alive indefinitely. Note that if this option is enabled, any tasks specified after this task will _never run_. By default, once grunt's tasks have completed, the web server stops. This option changes that behavior.
 
-This option can also be enabled ad-hoc by running the task like `grunt connect:targetname:keepalive`
+This option can also be enabled ad-hoc by running the task like `grunt nodestatic:targetname:keepalive`
 
-#### middleware
-Type: `Function`
-Default:
+#### dev
+Type: `Boolean`
+Default: `true`
 
-```js
-function(connect, options) {
-  return [
-    // Serve static files.
-    connect.static(options.base),
-    // Make empty directories browsable.
-    connect.directory(options.base),
-  ];
-}
-```
+If true, specify additional headers (this one is useful for development):
+'{"Cache-Control": "no-cache, must-revalidate"}'
 
-Lets you add in your own Connect middlewares. This option expects a function that returns an array of middlewares. See the [project Gruntfile][] and [project unit tests][] for a usage example.
+#### headers
+Type: `Object`
+Default: `{}`
 
-[project Gruntfile]: Gruntfile.js
-[project unit tests]: test/connect_test.js
+Sets response headers.
+
+example: `{ 'X-Hello': 'World!' }`
 
 ### Usage examples
 
 #### Basic Use
-In this example, `grunt connect` (or more verbosely, `grunt connect:server`) will start a static web server at `http://localhost:9001/`, with its base path set to the `www-root` directory relative to the gruntfile, and any tasks run afterwards will be able to access it.
+In this example, `grunt nodestatic` (or more verbosely, `grunt nodestatic:server`) will start a static web server at `http://localhost:9001/`, with its base path set to the `www-root` directory relative to the gruntfile, and any tasks run afterwards will be able to access it.
 
 ```javascript
 // Project configuration.
 grunt.initConfig({
-  connect: {
+  nodestatic: {
     server: {
       options: {
-        port: 9001,
+        port: 8080,
         base: 'www-root'
       }
     }
@@ -97,24 +84,24 @@ grunt.initConfig({
 });
 ```
 
-If you want your web server to use the default options, just omit the `options` object. You still need to specify a target (`uses_defaults` in this example), but the target's configuration object can otherwise be empty or nonexistent. In this example, `grunt connect` (or more verbosely, `grunt connect:uses_defaults`) will start a static web server using the default options.
+If you want your web server to use the default options, just omit the `options` object. You still need to specify a target (`uses_defaults` in this example), but the target's configuration object can otherwise be empty or nonexistent. In this example, `grunt nodestatic` (or more verbosely, `grunt nodestatic:uses_defaults`) will start a static web server using the default options.
 
 ```javascript
 // Project configuration.
 grunt.initConfig({
-  connect: {
+  nodestatic: {
     uses_defaults: {}
   }
 });
 ```
 
 #### Multiple Servers
-You can specify multiple servers to be run alone or simultaneously by creating a target for each server. In this example, running either `grunt connect:site1` or `grunt connect:site2` will  start the appropriate web server, but running `grunt connect` will run _both_. Note that any server for which the [keepalive](#keepalive) option is specified will prevent _any_ task or target from running after it.
+You can specify multiple servers to be run alone or simultaneously by creating a target for each server. In this example, running either `grunt nodestatic:site1` or `grunt nodestatic:site2` will  start the appropriate web server, but running `grunt nodestatic` will run _both_. Note that any server for which the [keepalive](#keepalive) option is specified will prevent _any_ task or target from running after it.
 
 ```javascript
 // Project configuration.
 grunt.initConfig({
-  connect: {
+  nodestatic: {
     site1: {
       options: {
         port: 9000,
@@ -131,38 +118,19 @@ grunt.initConfig({
 });
 ```
 
-#### Roll Your Own
-Like the [Basic Use](#basic-use) example, this example will start a static web server at `http://localhost:9001/`, with its base path set to the `www-root` directory relative to the gruntfile. Unlike the other example, this is done by creating a brand new task. in fact, this plugin isn't even installed!
 
-```javascript
-// Project configuration.
-grunt.initConfig({ /* Nothing needed here! */ });
-
-// After running "npm install connect --save-dev" to add connect as a dev
-// dependency of your project, you can require it in your gruntfile with:
-var connect = require('connect');
-
-// Now you can define a "connect" task that starts a webserver, using the
-// connect lib, with whatever options and configuration you need:
-grunt.registerTask('connect', 'Start a custom static web server.', function() {
-  grunt.log.writeln('Starting static web server in "www-root" on port 9001.');
-  connect(connect.static('www-root')).listen(9001);
-});
-```
 
 
 ## Release History
 
- * 2013-04-10   v0.3.0   Add ability to listen on system-assigned port.
- * 2013-03-07   v0.2.0   Upgrade connect dependency.
- * 2013-02-17   v0.1.2   Ensure Gruntfile.js is included on npm.
- * 2013-02-15   v0.1.1   First official release for Grunt 0.4.0.
- * 2013-01-18   v0.1.1rc6   Updating grunt/gruntplugin dependencies to rc6. Changing in-development grunt/gruntplugin dependency versions from tilde version ranges to specific versions.
- * 2013-01-09   v0.1.1rc5   Updating to work with grunt v0.4.0rc5.
- * 2012-11-01   v0.1.0   Work in progress, not yet officially released.
+ * 2013-04-11   v0.1.0   Work in progress, not yet officially released.
 
 ---
 
-Task submitted by ["Cowboy" Ben Alman](http://benalman.com)
+Task submitted by ["ia3andy" Andy Damevin](https://github.com/ia3andy)
 
-*This file was generated on Thu Apr 11 2013 00:01:44.*
+---
+
+This project is a fork form the official grunt-contrib-connect.
+This project use node-static as static web server
+

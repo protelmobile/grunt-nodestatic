@@ -25,10 +25,10 @@ module.exports = function(grunt) {
       tests: ['test/*_test.js']
     },
 
-    connect: {
+    nodestatic: {
       custom_base: {
         options: {
-          base: 'test',
+          base: 'test'
         },
       },
       custom_port: {
@@ -36,17 +36,10 @@ module.exports = function(grunt) {
           port: 9000,
         },
       },
-      custom_middleware: {
+      dev_move: {
         options: {
           port: 9001,
-          middleware: function(connect, options) {
-            // Return array of whatever middlewares you want
-            return [
-              function(req, res, next) {
-                res.end('Hello from port ' + options.port);
-              }
-            ];
-          },
+          dev: true
         },
       },
     }
@@ -58,6 +51,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-internal');
 
-  grunt.registerTask('test', ['connect', 'nodeunit']);
+  grunt.registerTask('test', ['nodestatic', 'nodeunit']);
   grunt.registerTask('default', ['jshint', 'test', 'build-contrib']);
 };
