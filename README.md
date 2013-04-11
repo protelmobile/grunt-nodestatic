@@ -2,10 +2,8 @@
 
 > Start a node-static web server.
 
-
-
 ## Getting Started
-This plugin requires Grunt `~0.4.0`
+This plugin requires Grunt `~0.4.1`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -13,128 +11,79 @@ If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out th
 npm install grunt-nodestatic --save-dev
 ```
 
-Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
+One the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:
 
 ```js
 grunt.loadNpmTasks('grunt-nodestatic');
 ```
 
+## The "nodestatic" task
 
+### Overview
+In your project's Gruntfile, add a section named `nodestatic` to the data object passed into `grunt.initConfig()`.
 
+```js
+grunt.initConfig({
+  nodestatic: {
+    options: {
+      // Task-specific options go here.
+    },
+    your_target: {
+      // Target-specific file lists and/or options go here.
+    },
+  },
+})
+```
 
-## static task
-_Run this task with the `grunt nodestatic` command._
-
-Note that this server only runs as long as grunt is running. Once grunt's tasks have completed, the web server stops. This behavior can be changed with the [keepalive](#keepalive) option, and can be enabled ad-hoc by running the task like `grunt nodestatic:keepalive`.
-
-This task was designed to be used in conjunction with another task that is run immediately afterwards, like the [grunt-contrib-qunit plugin](https://github.com/gruntjs/grunt-contrib-qunit) `qunit` task.
 ### Options
 
-#### port
-Type: `Integer`
-Default: `8080`
-
-The port on which the webserver will respond. The task will fail if the specified port is already in use. You can use the special values `0` or `'?'` to use a system-assigned port.
-
-#### base
+#### options.separator
 Type: `String`
-Default: `'.'`
+Default value: `',  '`
 
-The base (or root) directory from which files will be served. Defaults to the project Gruntfile's directory.
+A string value that is used to do something with whatever.
 
-#### keepalive
-Type: `Boolean`
-Default: `false`
+#### options.punctuation
+Type: `String`
+Default value: `'.'`
 
-Keep the server alive indefinitely. Note that if this option is enabled, any tasks specified after this task will _never run_. By default, once grunt's tasks have completed, the web server stops. This option changes that behavior.
+A string value that is used to do something else with whatever else.
 
-This option can also be enabled ad-hoc by running the task like `grunt nodestatic:targetname:keepalive`
+### Usage Examples
 
-#### dev
-Type: `Boolean`
-Default: `true`
+#### Default Options
+In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
 
-If true, specify additional headers (this one is useful for development):
-'{"Cache-Control": "no-cache, must-revalidate"}'
-
-#### headers
-Type: `Object`
-Default: `{}`
-
-Sets response headers.
-
-example: `{ 'X-Hello': 'World!' }`
-
-### Usage examples
-
-#### Basic Use
-In this example, `grunt nodestatic` (or more verbosely, `grunt nodestatic:server`) will start a static web server at `http://localhost:9001/`, with its base path set to the `www-root` directory relative to the gruntfile, and any tasks run afterwards will be able to access it.
-
-```javascript
-// Project configuration.
+```js
 grunt.initConfig({
   nodestatic: {
-    server: {
-      options: {
-        port: 8080,
-        base: 'www-root'
-      }
-    }
-  }
-});
-```
-
-If you want your web server to use the default options, just omit the `options` object. You still need to specify a target (`uses_defaults` in this example), but the target's configuration object can otherwise be empty or nonexistent. In this example, `grunt nodestatic` (or more verbosely, `grunt nodestatic:uses_defaults`) will start a static web server using the default options.
-
-```javascript
-// Project configuration.
-grunt.initConfig({
-  nodestatic: {
-    uses_defaults: {}
-  }
-});
-```
-
-#### Multiple Servers
-You can specify multiple servers to be run alone or simultaneously by creating a target for each server. In this example, running either `grunt nodestatic:site1` or `grunt nodestatic:site2` will  start the appropriate web server, but running `grunt nodestatic` will run _both_. Note that any server for which the [keepalive](#keepalive) option is specified will prevent _any_ task or target from running after it.
-
-```javascript
-// Project configuration.
-grunt.initConfig({
-  nodestatic: {
-    site1: {
-      options: {
-        port: 9000,
-        base: 'www-roots/site1'
-      }
+    options: {},
+    files: {
+      'dest/default_options': ['src/testing', 'src/123'],
     },
-    site2: {
-      options: {
-        port: 9001,
-        base: 'www-roots/site2'
-      }
-    }
-  }
-});
+  },
+})
 ```
 
+#### Custom Options
+In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
 
+```js
+grunt.initConfig({
+  nodestatic: {
+    options: {
+      separator: ': ',
+      punctuation: ' !!!',
+    },
+    files: {
+      'dest/default_options': ['src/testing', 'src/123'],
+    },
+  },
+})
+```
 
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-
- * 2013-04-11   v0.1.0   Work in progress, not yet officially released.
-
-
----
-
-This project is a fork form the official grunt-contrib-connect.
-
-This project use node-static as static web server.
-
----
-
-Task submitted by ["ia3andy" Andy Damevin](https://github.com/ia3andy)
-
-
-
+_(Nothing yet)_
