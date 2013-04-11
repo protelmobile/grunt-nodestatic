@@ -125,12 +125,16 @@ grunt.initConfig({
 
  * 2013-04-11   v0.1.0   Work in progress, not yet officially released.
 
----
-
-Task submitted by ["ia3andy" Andy Damevin](https://github.com/ia3andy)
 
 ---
 
 This project is a fork form the official grunt-contrib-connect.
-This project use node-static as static web server
+
+This project use node-static as static web server.
+
+---
+
+Task submitted by ["ia3andy" Andy Damevin](https://github.com/ia3andy)
+
+
 
