@@ -1,6 +1,6 @@
 {
   "name": "grunt-nodestatic",
-  "description": "Start a node-static web server.",
+  "description": "Start a node-static web server (perfect as a development server combined with watch or regarde).",
   "version": "0.1.1",
   "homepage": "https://github.com/ia3andy/grunt-nodestatic",
   "author": {
