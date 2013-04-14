@@ -57,6 +57,12 @@ Default: `true`
 If true, specify additional headers (this one is useful for development):
 '{"Cache-Control": "no-cache, must-revalidate"}'
 
+#### verbose
+Type: `Boolean`
+Default: `false`
+
+If true, show each file requested on the server with differents colors following the status code
+
 #### headers
 Type: `Object`
 Default: `{}`
@@ -124,6 +130,7 @@ grunt.initConfig({
 ## Release History
 
  * 2013-04-11   v0.1.0   First working version
+ * 2013-04-14   v0.1.1   Fix dev mode and verbose option
 
 
 ---

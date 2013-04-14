@@ -36,7 +36,7 @@ module.exports = function(grunt) {
       serverInfo: options.serverInfo
     };
 
-    if(options.nocache){
+    if(options.dev){
       if(serverOptions.headers == null){
         serverOptions.headers = {}
       }
