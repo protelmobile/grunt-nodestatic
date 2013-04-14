@@ -1,6 +1,6 @@
 # grunt-nodestatic
 
-> Start a node-static web server.
+> Start a node-static web server (perfect as a development server combined with watch of regarde).
 
 
 
@@ -27,7 +27,10 @@ _Run this task with the `grunt nodestatic` command._
 
 Note that this server only runs as long as grunt is running. Once grunt's tasks have completed, the web server stops. This behavior can be changed with the [keepalive](#keepalive) option, and can be enabled ad-hoc by running the task like `grunt nodestatic:keepalive`.
 
-This task was designed to be used in conjunction with another task that is run immediately afterwards, like the [grunt-contrib-qunit plugin](https://github.com/gruntjs/grunt-contrib-qunit) `qunit` task.
+This task was designed to be used in conjunction with another task that is run immediately afterwards, like the [grunt-contrib-watch plugin](https://github.com/gruntjs/grunt-contrib-watch) `watch` task.
+
+This plugin is perfect for development purpose combined with grunt watch.
+
 ### Options
 
 #### port
