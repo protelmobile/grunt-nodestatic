@@ -1,6 +1,6 @@
 # grunt-nodestatic
 
-> Start a node-static web server (perfect as a development server combined with watch of regarde).
+> Start a node-static web server (perfect as a development server combined with watch or regarde).
 
 
 
