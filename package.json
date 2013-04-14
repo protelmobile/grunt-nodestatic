@@ -1,7 +1,7 @@
 {
   "name": "grunt-nodestatic",
   "description": "Start a node-static web server.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/ia3andy/grunt-nodestatic",
   "author": {
     "name": "Andy Damevin",
