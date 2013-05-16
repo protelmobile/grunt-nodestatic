@@ -59,7 +59,8 @@ module.exports = function(grunt) {
 
     var fileServer = new nodestatic.Server(options.base, serverOptions)
     require('http').createServer(function (request, response) {
-        request.addListener('end', function () {
+        //addListener commented out for windows
+		//request.addListener('end', function () {
             fileServer.serve(request, response, function(e, rsp) {
                 if (e && e.status === 404) {
                     response.writeHead(e.status, e.headers);
@@ -71,7 +72,7 @@ module.exports = function(grunt) {
                     log(request, response);
                 }
             });
-        });
+        //});
     }).listen(options.port)
     .on('listening', function() {
       grunt.log.writeln('Serving ' + options.base + ' on port ' + options.port + '.');
