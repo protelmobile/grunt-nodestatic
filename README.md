@@ -1,6 +1,6 @@
 # grunt-nodestatic
 
-> Start a node-static web server (perfect as a development server combined with watch or regarde).
+> Start a node-static web server (perfect as a development server combined with watch of regarde).
 
 
 
@@ -134,6 +134,7 @@ grunt.initConfig({
 
  * 2013-04-11   v0.1.0   First working version
  * 2013-04-14   v0.1.1   Fix dev mode and verbose option
+ * 2013-04-14   v0.1.2   add Windows compatibility
 
 
 ---
