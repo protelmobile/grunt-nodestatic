@@ -28,8 +28,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-     "node-static": "~0.6.7",
-     "colors": "~0.6.0"
+    "node-static": "~0.6.7",
+    "colors": "~0.6.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.1.1",
@@ -38,17 +38,17 @@
     "grunt": "~0.4.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": ">=0.4.0"
   },
   "keywords": [
-      "grunt",
-      "gruntplugin",
-      "server",
-      "connect",
-      "static",
-      "node-static",
-      "file",
-      "http"
+    "grunt",
+    "gruntplugin",
+    "server",
+    "connect",
+    "static",
+    "node-static",
+    "file",
+    "http"
   ],
   "contributors": {
     "name": "Andy DAMEVIN",
